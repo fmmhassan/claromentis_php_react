@@ -35,5 +35,10 @@ class ExpenseController{
         ->exportDataToCSV();
     }
 
+    public function getExpensesSummary(){
+        return $expenseSummaryData = $this->ExpenseModel->getGroupByCategory();//retrieve summary data
+        
+    }
+
 }
 ?>

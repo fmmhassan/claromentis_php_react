@@ -1,0 +1,12 @@
+.align-left{
+    text-align: left;
+}
+table {
+    border-collapse: collapse;
+  }
+table, th, td {
+border: 1px solid;
+}
+.table-cell{
+    padding: 8px;
+}
