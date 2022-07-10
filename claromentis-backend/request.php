@@ -20,7 +20,7 @@ if(isset($_GET['submit']) && $_GET['submit'] == 'export'){ //export csv
     echo json_encode($expenseController->export());
     return;
 }
-if(isset($_GET['submit']) && $_GET['submit'] == 'getExpensesSummary'){ //export csv
+if(isset($_GET['submit']) && $_GET['submit'] == 'getExpensesSummary'){ //expenses summary
     echo json_encode($expenseController->getExpensesSummary());
     return;
 }
