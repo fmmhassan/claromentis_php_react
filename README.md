@@ -11,7 +11,7 @@ claromentis-frontend/.env
     REACT_APP_API_BASE_URL->specify-the-backend-location-to-access
 
 # SET DB configuration/queries
-Database configuration
+Database configuration(use mysql)
     Create a database of any name you prefer
     Run the below script within the database:
         CREATE TABLE `expenses` (
@@ -28,3 +28,7 @@ Configurations details that were used within development is already available
     Run the below commands within frontend project(claromentis-frontend)
     npm install
     npm start
+
+# CSV Import template example
+    the sample template can be found at OOP_PHP_REACT/test_sample.csv.
+    more/different items can be added to import
