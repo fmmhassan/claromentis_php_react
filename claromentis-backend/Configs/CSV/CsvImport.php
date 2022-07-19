@@ -1,34 +1,24 @@
 <?php
-require "./Contracts/CSVImportContract.php";
+namespace Configs\CSV;
+use Contracts\CSVImportContract;
 
 class CsvImport implements CSVImportContract{
     private $file;
     
-    private $fileMimes = [
-        'text/x-comma-separated-values',
-        'text/comma-separated-values',
-        'application/octet-stream',
-        'application/vnd.ms-excel',
-        'application/x-csv',
-        'text/x-csv',
-        'text/csv',
-        'application/csv',
-        'application/excel',
-        'application/vnd.msexcel',
-        'text/plain'
+    private $csvFileType = [
+        'text/csv'
     ];
     public function __construct($FILE) {
         $this->file = $FILE;
     }
 
     public function validateFile(){
-        return (!empty($this->file['name']) && in_array($this->file['type'], $this->fileMimes));
+        return (!empty($this->file['name']) && in_array($this->file['type'], $this->csvFileType));
     }
 
     public function readFile(){
 
         $csvFile = fopen($this->file['tmp_name'], 'r');
-        // expenses
         $readArray = [];
         // Parse data from CSV file line by line
         while (($getData = fgetcsv($csvFile, 10000, ",")) !== FALSE){

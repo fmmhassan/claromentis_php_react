@@ -24,6 +24,9 @@ Database configuration(use mysql)
 
 Configurations details that were used within development is already available
 
+# Within backend Project
+run composer dump-autoload
+
 # To Run the frontend project
     Run the below commands within frontend project(claromentis-frontend)
     npm install

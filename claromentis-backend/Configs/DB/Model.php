@@ -1,7 +1,8 @@
 <?php
-require "./Contracts/ModelQuery.php";
-require "./Contracts/Modelimplementation.php";
-require './Configs/DB/Database.php';
+namespace Configs\DB;
+use Contracts\ModelQuery;
+use Contracts\Modelimplementation;
+use Configs\DB\Database;
 
 abstract class Model implements ModelQuery,Modelimplementation{
     protected $table;

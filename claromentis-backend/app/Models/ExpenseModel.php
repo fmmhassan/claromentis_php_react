@@ -1,5 +1,6 @@
 <?php
-require './Configs/DB/Model.php';
+namespace App\Models;
+use Configs\DB\Model;
 
 class ExpenseModel extends Model{
     

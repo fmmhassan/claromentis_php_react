@@ -1,5 +1,6 @@
 <?php
-require "./config.php";
+namespace Configs\DB;
+use PDO;
 
 class Database {
     const DB_HOST = DB_SERVERNAME;

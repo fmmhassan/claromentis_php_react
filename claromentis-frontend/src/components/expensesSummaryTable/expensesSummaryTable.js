@@ -17,8 +17,7 @@ export default function ExpensesSummaryTable() {
         }
     })
     .then(responseData => {
-        setData(responseData.data);
-        console.log(responseData.data)
+        setData(responseData.data[0]);
     })
     .finally(() => {
         setLoading(false);
@@ -30,7 +29,7 @@ export default function ExpensesSummaryTable() {
     <div>
       {loading && <div>A moment please...</div>}
       
-        <table>
+        <table class="table table-striped">
             <tbody>
 
                 {!loading && expensesSummary &&

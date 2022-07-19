@@ -1,7 +1,8 @@
 <?php
-require './Models/ExpenseModel.php';
-require './Configs/CSV/CsvImport.php';
-require './Configs/CSV/CsvExport.php';
+namespace App\Controllers;
+use App\Models\ExpenseModel;
+use Configs\CSV\CsvImport;
+use Configs\CSV\CsvExport;
 
 class ExpenseController{
     private $ExpenseModel;
@@ -16,11 +17,11 @@ class ExpenseController{
             
             $readValues = $CsvImport->readFile();
             $result = $this->ExpenseModel->insert($readValues);
-            return $result;
+            
+            return response($result);
         }
-        else
-        {
-            return "Please select valid file";
+        else{
+            return response('Please select valid file',422);
         }
     }
 
@@ -36,8 +37,8 @@ class ExpenseController{
     }
 
     public function getExpensesSummary(){
-        return $expenseSummaryData = $this->ExpenseModel->getGroupByCategory();//retrieve summary data
-        
+        $expenseSummaryData = $this->ExpenseModel->getGroupByCategory();//retrieve summary data
+        return response($expenseSummaryData);
     }
 
 }

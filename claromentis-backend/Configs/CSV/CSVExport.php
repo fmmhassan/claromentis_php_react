@@ -1,5 +1,6 @@
 <?php
-require "./Contracts/CSVExportContract.php";
+namespace Configs\CSV;
+use Contracts\CSVExportContract;
 
 class CSVExport implements CSVExportContract{
     private $exportData, $columnHeaders, $fileName;
