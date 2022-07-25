@@ -3,7 +3,6 @@ import React,{Component} from 'react';
 
 require('dotenv').config()
 
-
 class FileUpload extends Component {
 	state = {
 		selectedFile: null,
@@ -15,38 +14,31 @@ class FileUpload extends Component {
 	
 	onFileUpload = () => {
 		let vm = this;
-		// Create an object of formData
 		const formData = new FormData();
 		formData.append(
-			"file",
-			this.state.selectedFile,
+			"file", this.state.selectedFile,
 		);
-  		formData.append('submit', "import")
 	
-        axios.post(process.env.REACT_APP_API_BASE_URL+"request.php",
+        axios.post(process.env.REACT_APP_API_BASE_URL+"expense/import",
         formData)
-        .then(function(responseData){
-			if(responseData.data[1] === 422){
-				vm.setState({ errorMessage: responseData.data[0][0] });
-			}
-			else if(responseData.data[1] === 200){
-				vm.setState({ errorMessage: '' });
-				window.location.reload(false);
-			}
+        .then(function(){
+			vm.setState({ errorMessage: '' });
+			window.location.reload(false);
         })
+		.catch(function(errorResponse){
+			if(errorResponse.response.status === 422){
+				vm.setState({ errorMessage: errorResponse.response.data });
+			}
+		})
 	};
 	
-	// File content to be displayed after
-	// file upload is complete
 	fileData = () => {
 	
 	if (!!this.state.errorMessage) {
 		return (
-			
-			<div class='alert alert-danger' role="alert">
+			<div className='alert alert-danger' role="alert">
 				{this.state.errorMessage}
 			</div>
-  
 		);
 	}
 	};
@@ -54,15 +46,13 @@ class FileUpload extends Component {
 	render() {
 	
 	return (
-		<div class="col-md-5">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="input-group mb-3">
-						<input type="file" onChange={this.onFileChange} class="form-control"/>
-						<button onClick={this.onFileUpload} class="btn btn-outline-secondary">Upload!</button>
+		<div className="col-md-5">
+			<div className="row">
+					<div className="input-group mb-3">
+						<input type="file" onChange={this.onFileChange} className="form-control"/>
+						<button onClick={this.onFileUpload} className="btn btn-primary position-relative">Upload!</button>
 					</div>
 					{this.fileData()}
-				</div>
 			</div>
 			
 		</div>

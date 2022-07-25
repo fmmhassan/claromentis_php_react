@@ -1,7 +1,8 @@
 <?php
 namespace Contracts;
-interface CSVImportContract{
+interface  CSVImportContract{
     public function validateFile();
     public function readFile();
+    public function setReadColumns($columns);
 }
 ?>

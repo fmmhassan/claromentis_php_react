@@ -18,8 +18,6 @@ class CSVExport implements CSVExportContract{
         $fields = $this->columnHeaders;
         fputcsv($f, $fields, $delimiter);
 
-        // retreive summary info
-        // Output each row of the data, format line as csv and write to file pointer 
         foreach($this->exportData as $row){
             $lineData = [];
             foreach($row as $columnValue){

@@ -86,9 +86,7 @@ class Database {
     public function get() {
         
         $connection = $this->getWrappedConnection();
-        // $this->beginTransaction();
         $query = $this->selectQuery.' FROM '.$this->table.$this->where.$this->groupByQuery;
-        // return $query;
         $stmt = $connection->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS);
@@ -108,7 +106,6 @@ class Database {
     }
     
     public function select($params = []){
-        // echo '1'; exit;
         $this->selectQuery = 'SELECT * ';
         if(!empty($params)){
             $this->selectQuery = 'SELECT  ';

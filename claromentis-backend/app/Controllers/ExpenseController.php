@@ -6,13 +6,19 @@ use Configs\CSV\CsvExport;
 
 class ExpenseController{
     private $ExpenseModel;
+    private const CSV_COLUMN_ORDER = [
+        'category',
+        'unit_price',
+        'qty'
+    ];
     public function __construct() {
         $this->ExpenseModel = new ExpenseModel;
     }
 
     public function import(){
         $CsvImport = new CsvImport($_FILES['file']);
-        
+        $CsvImport->setReadColumns(self::CSV_COLUMN_ORDER);
+
         if ($CsvImport->validateFile()){
             
             $readValues = $CsvImport->readFile();
@@ -21,9 +27,10 @@ class ExpenseController{
             return response($result);
         }
         else{
-            return response('Please select valid file',422);
+            return response('Valid CSV File is required',422);
         }
     }
+
 
     public function export(){
         $expenseSummaryData = $this->ExpenseModel->getGroupByCategory();//retrieve data for export

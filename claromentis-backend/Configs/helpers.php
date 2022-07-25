@@ -6,6 +6,7 @@ function response($data = [],$status = 200){
     else{
         $responseData = [$data];
     }
-    echo json_encode([$responseData, $status]);
+    http_response_code($status);
+    echo json_encode($responseData);
 }
 ?>

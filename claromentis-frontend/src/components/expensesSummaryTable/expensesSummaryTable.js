@@ -11,13 +11,9 @@ export default function ExpensesSummaryTable() {
     
 
     setLoading(true);
-    axios.get(process.env.REACT_APP_API_BASE_URL+'request.php', {
-        params : {
-            submit : "getExpensesSummary"
-        }
-    })
+    axios.get(process.env.REACT_APP_API_BASE_URL+'expense/summary')
     .then(responseData => {
-        setData(responseData.data[0]);
+        setData(responseData.data);
     })
     .finally(() => {
         setLoading(false);
@@ -26,22 +22,26 @@ export default function ExpensesSummaryTable() {
    
 
    return (
-    <div>
-      {loading && <div>A moment please...</div>}
-      
-        <table class="table table-striped">
-            <tbody>
+    <div className="table-responsive">
+        {loading && <div>Loading...</div>}
+        {
+            expensesSummary!==null &&
+            
+            <table className="table table-striped">
+                <tbody>
 
-                {!loading && expensesSummary &&
-                expensesSummary.map(({ id, Category, Amount }) => (
-                <tr key={Category}>
-                    <th className="align-left table-cell">{Category}</th>
-                    <td className="table-cell">{Amount}</td>
-                </tr>
-                ))}
-            </tbody>
+                    {!loading && expensesSummary &&
+                    expensesSummary.map(({  Category, Amount }) => (
+                    <tr key={Category}>
+                        <th className="align-left table-cell">{Category}</th>
+                        <td className="table-cell">{Amount}</td>
+                    </tr>
+                    ))}
+                </tbody>
 
-        </table>
+            </table>
+        }
+        
         
     </div>
   );
